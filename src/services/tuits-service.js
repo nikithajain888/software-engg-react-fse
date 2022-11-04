@@ -1,6 +1,6 @@
 import axios from "axios";
 //const BASE_URL = "http://softwareengineeringnodetest-env.eba-86qtfsgp.us-east-1.elasticbeanstalk.com"
-const BASE_URL = "http://my-node-express-project-env.eba-hxq4pgvm.us-east-1.elasticbeanstalk.com";
+const BASE_URL = "http://softwareengineeringnodetest-env.eba-86qtfsgp.us-east-1.elasticbeanstalk.com";
 const TUITS_API = `${BASE_URL}/api/tuits`;
 const USERS_API = `${BASE_URL}/api/users`;
 
@@ -27,3 +27,7 @@ export const updateTuit = (tid, tuit) =>
 export const deleteTuit = (tid) =>
   axios.delete(`${TUITS_API}/${tid}`)
     .then(response => response.data);
+
+export const deleteTuitsByTuit = (tuit) =>
+  axios.get(`${TUITS_API}/${tuit}/delete`)
+  .then(response => response.data);
