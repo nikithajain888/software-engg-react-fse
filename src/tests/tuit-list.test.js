@@ -1,4 +1,4 @@
-import {Tuits} from "../components/tuits";
+import Tuits from "../components/tuits";
 import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
 import {findAllTuits} from "../services/tuits-service";
@@ -7,44 +7,41 @@ import axios from "axios";
 jest.mock('axios');
 
 const MOCKED_USERS = [
-  {username: 'alice', _id:'123'},
-  {username: 'bob', _id:'234'},
-  {username: 'charlie', _id:'345'}
+  {username: 'userTest', _id:'63598a31bf48885e53c27bd1'},
+  {username: 'Testing', _id:'635986a0bf48885e53c27ba7'}
 ];
 
 const MOCKED_TUITS = [
-  {tuit:"alice's tuit", postedBy:MOCKED_USERS[0]._id, _id:'321'},
-  {tuit:"bob's tuit", PostedBy:MOCKED_USERS[1]._id, _id:'432' },
-  {tuit:"charlie's tuit", PostedBY:MOCKED_USERS[2]._id, _id:'543'}
+  {tuit: "test1tuit12345",postedBy:'userTest', _id:"6366b4b435af7af316808f20"},
+  {tuit: "testtuit",postedBy:'Testing',  _id:"6365867335af7af316808ed9"}
 ];
 
+
+// test tuit list renders static tuit array
 test('tuit list renders static tuit array', () => {
-  // TODO: implement this
   render(
       <HashRouter>
-          <Tuits tuits={MOCKED_TUITS}/>
-      </HashRouter>);
-      const linkElement = screen.getByText(/alice's tuit/i);
-      expect(linkElement).toBeInTheDocument();
+        <Tuits tuits={MOCKED_TUITS}/>
+      </HashRouter>
+  );
+
+  const linkElementA = screen.getByText(/test1tuit12345/i);
+  const linkElementB = screen.getByText(/testtuit/i);
+  expect(linkElementA).toBeInTheDocument();
+  expect(linkElementB).toBeInTheDocument();
 });
 
-test('tuit list renders async', async () => {
-  // TODO: implement this
-})
 
-
-test('tuit list renders mocked', async () => {
-  // TODO: implement this
+test('tuits list renders mocked', async () => {
   axios.get.mockImplementation(() =>
-      Promise.resolve({ data: {tuits: MOCKED_TUITS} }));
+  Promise.resolve({ data: {tuits: MOCKED_TUITS} }));
   const response = await findAllTuits();
-  const tuits = response.tuits;
-
+  const tuits = response.tuits
   render(
-      <HashRouter>
-        <Tuits tuits={tuits}/>
-      </HashRouter>);
+    <HashRouter>
+      <Tuits tuits={tuits}/>
+    </HashRouter>);
 
-  const tuit = screen.getByText(/bob's tuit/i);
+  const tuit = screen.getByText(/testtuit/i);
   expect(tuit).toBeInTheDocument();
 });
