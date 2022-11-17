@@ -1,6 +1,6 @@
 
 import {
-  createTuit, deleteTuit, findAllTuits, findTuitById, findTuitByUser
+  createTuit, deleteTuit, findAllTuits, findTuitById, findAllTuitsByUser
 } from "../services/tuits-service";
 
 import {
@@ -124,7 +124,7 @@ describe('can retrieve all tuits with REST API', () => {
           createTuit(myTuit.postedBy, myTuit)));
   });
   afterAll(async () => {
-    const testingInsertedTuits = await findTuitByUser(test_user_id);
+    const testingInsertedTuits = await findAllTuitsByUser(test_user_id);
     return Promise.all(testingInsertedTuits.map(tuit => deleteTuit(tuit._id)));
   });
   test('can retrieve all tuits with REST API', async () => {

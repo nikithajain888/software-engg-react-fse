@@ -1,8 +1,11 @@
 import axios from "axios";
-//const BASE_URL = "http://softwareengineeringnodetest-env.eba-86qtfsgp.us-east-1.elasticbeanstalk.com"
-const BASE_URL = "http://softwareengineeringnodetest-env.eba-86qtfsgp.us-east-1.elasticbeanstalk.com";
+//const BASE_URL = "http://softwareengineeringnodetest-env.eba-86qtfsgp.us-east-1.elasticbeanstalk.com";
+const BASE_URL = "http://localhost:3000"
 const TUITS_API = `${BASE_URL}/api/tuits`;
 const USERS_API = `${BASE_URL}/api/users`;
+const api = axios.create({
+  withCredentials: true
+});
 
 export const findAllTuits = () =>
   axios.get(TUITS_API)
@@ -12,12 +15,16 @@ export const findTuitById = (tid) =>
   axios.get(`${TUITS_API}/${tid}`)
     .then(response => response.data);
 
-export const findTuitByUser = (uid) =>
-  axios.get(`${USERS_API}/${uid}/tuits`)
-    .then(response => response.data);
+export const findAllTuitsByUser = (uid) =>
+  api.get(`${USERS_API}/${uid}/tuits`)
+  .then(response => response.data);
+  // axios.get(`${USERS_API}/${uid}/tuits`)
+  //   .then(response => response.data);
 
 export const createTuit = (uid, tuit) =>
-  axios.post(`${USERS_API}/${uid}/tuits`, tuit)
+  // axios.post(`${USERS_API}/${uid}/tuits`, tuit)
+  //   .then(response => response.data);
+  api.post(`${USERS_API}/${uid}/tuits`, tuit)
     .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
