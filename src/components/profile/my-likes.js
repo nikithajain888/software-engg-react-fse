@@ -3,14 +3,15 @@ import * as service from "../../services/likes-service";
 import {useEffect, useState} from "react";
 
 const MyLikes = () => {
-    const [likedTuits, setLikedTuits] = useState([]);
+    const [likedTuits, setLikedTuis] = useState([]);
     const findTuitsILike = () =>
-        service.findAllTuitsLikedByUser("637301b9cd9ddea35e0746ef")
-            .then((tuits) => setLikedTuits(tuits));
+        service.findAllTuitsLikedByUser("me")
+            .then((tuits) => setLikedTuis(tuits));
     useEffect(findTuitsILike, []);
     
     return(
         <div>
+            <h2>My Likes</h2>
             <Tuits tuits={likedTuits} refreshTuits={findTuitsILike}/>
         </div>
     );

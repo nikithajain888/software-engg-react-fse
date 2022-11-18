@@ -15,9 +15,8 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
      * Check if a tuit has been liked by user or not.
      */
     const checkLike = async() => {
-      const userLiked = await likeService.userHasLikedTuit("637301b9cd9ddea35e0746ef",tuit._id);
-      console.log(userLiked)
-      if (userLiked.length===0) {
+      const userLiked = await likeService.userHasLikedTuit("me",tuit._id);
+      if (userLiked.length===1) {
         setHasLike(false);
         
       }else{
@@ -26,13 +25,12 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
       }
     }
 
-    /**
-     * Check if a tuit has been disliked by user or not.
-     */
+    // /**
+    //  * Check if a tuit has been disliked by user or not.
+    //  */
     const checkDislike = async() => {
-      const userDisliked = await dislikeService.userHasDislikedTuit("637301b9cd9ddea35e0746ef",tuit._id);
-      console.log(userDisliked)
-      if (userDisliked.length===0){
+      const userDisliked = await dislikeService.userHasDislikedTuit("me",tuit._id);
+      if (userDisliked.length===1){
         setHasDisliked(false);
        
       }else{
@@ -45,17 +43,15 @@ const TuitStats = ({tuit, likeTuit = () => {}, dislikeTuit = () => {}}) => {
      * The onClick function on like button.
      */
     const clickOnLike = async() => {
-      await likeTuit(tuit);
+      likeTuit(tuit);
       await checkLike();
-     //await checkDislike();
     }
 
-     /**
-     * The onClick function on dislike button.
-     */
+    //  /**
+    //  * The onClick function on dislike button.
+    //  */
     const clickOnDislike = async() => {
-      await dislikeTuit(tuit);
-      //await checkLike();
+      dislikeTuit(tuit);
       await checkDislike();
     }
 
