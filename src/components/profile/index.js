@@ -8,6 +8,7 @@ import MyDislikes from "./my-dislikes";
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
+ 
   const [profile, setProfile] = useState({});
   useEffect(async () => {
     try {
@@ -21,6 +22,7 @@ const Profile = () => {
     service.logout()
         .then(() => navigate('/login'));
   }
+  
   return(
     <div className="ttr-profile">
       <div className="border border-bottom-0">
@@ -105,4 +107,5 @@ const Profile = () => {
     </div>
   );
 }
+
 export default Profile;
