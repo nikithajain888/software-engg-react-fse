@@ -1,5 +1,6 @@
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL
+//const BASE_URL = "http://softwareengineeringnodetest-env.eba-86qtfsgp.us-east-1.elasticbeanstalk.com";
 const AUTH_API = `${BASE_URL}/auth`;
 
 const api = axios.create({
