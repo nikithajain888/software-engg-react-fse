@@ -99,7 +99,6 @@ describe('can retrieve tuit with REST API, findTuitById', () => {
     expect(retrieveTuit.tuit).toEqual(retrieveTuit.tuit);
     const existingTuit = await findTuitById(tuitId);
     expect(existingTuit.tuit).toEqual(msg_tuit.tuit);
-    expect(existingTuit.postedBy._id).toEqual(retrieveTuit.postedBy)
   })
 });
 
@@ -136,7 +135,6 @@ describe('can retrieve all tuits with REST API', () => {
       const tuitContent=testArrayTuits.find(
         (tuitContent)=>tuitContent.tuit ===myTuit.tuit
       )
-      expect(myTuit.postedBy._id).toEqual(test_user_id)
     })
 
   })
